@@ -1,5 +1,5 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
-
+<h3>TheraPist Onlinemi</h3>
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
@@ -59,3 +59,101 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+# Therapist Booking Platform
+
+A Laravel-based web platform for online therapist bookings. The system supports role-based access for Admins, Therapists, and Customers (Patients), allowing features like therapist profile management, schedule setting, appointment bookings, payment handling, and medical record keeping.
+
+## 📦 Features
+
+### 🔐 Role-Based Access
+- **Admin**: Manages users and ensures system security.
+- **Therapist**: Offers services, manages schedules, and adds personal profiles.
+- **Customer (Patient)**: Books appointments, leaves reviews, and views therapist details.
+
+### 🗃️ Database Structure
+
+#### 1. `users`
+Stores general user data.
+- Fields: `id_pengguna`, `nama_pengguna`, `kata_sandi`, `email`, `peran`, `alamat`, etc.
+
+#### 2. `therapist`
+Additional profile info for users with the role "terapis".
+- Fields: `id_terapis`, `id_pengguna`, `spesialisasi`, `nomor_lisensi`, `tarif_per_jam`, etc.
+
+#### 3. `jadwal`
+Schedules for therapist availability.
+- Fields: `id_jadwal`, `id_terapis`, `hari`, `jam_mulai`, `jam_selesai`, `tersedia`.
+
+#### 4. `janji_temu`
+Appointment records between patients and therapists.
+- Fields: `id_janji`, `id_pengguna`, `id_terapis`, `id_jadwal`, `tanggal_janji`, `status`, `keluhan`, `catatan_dokter`.
+
+#### 5. `pembayaran`
+Payment details for appointments.
+- Fields: `id_pembayaran`, `id_janji`, `jumlah`, `metode`, `status`, `bukti_pembayaran`.
+
+#### 6. `ulasan`
+User reviews for therapists.
+- Fields: `id_ulasan`, `id_janji`, `id_pengguna`, `id_terapis`, `rating`, `komentar`.
+
+#### 7. `rekam_medis`
+Medical records created by therapists.
+- Fields: `id_rekam_medis`, `id_pengguna`, `id_terapis`, `diagnosa`, `resep_obat`, `catatan_tambahan`.
+
+### 🔄 Relationship Overview
+<table border="1" cellpadding="8" cellspacing="0">
+  <thead>
+    <tr>
+      <th>From</th>
+      <th>To</th>
+      <th>Relation Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>users</code></td>
+      <td><code>therapist</code></td>
+      <td>One-to-One</td>
+      <td>A user with therapist role has one therapist profile.</td>
+    </tr>
+    <tr>
+      <td><code>therapist</code></td>
+      <td><code>jadwal</code></td>
+      <td>One-to-Many</td>
+      <td>A therapist can have multiple schedules.</td>
+    </tr>
+    <tr>
+      <td><code>users</code></td>
+      <td><code>janji_temu</code></td>
+      <td>One-to-Many</td>
+      <td>A patient can book many appointments.</td>
+    </tr>
+    <tr>
+      <td><code>janji_temu</code></td>
+      <td><code>pembayaran</code>, <code>ulasan</code></td>
+      <td>One-to-One</td>
+      <td>Each appointment has one payment and one review.</td>
+    </tr>
+  </tbody>
+</table>
+
+
+## 🚀 Getting Started
+
+### Requirements
+- PHP >= 8.x
+- Laravel >= 10.x
+- MySQL / MariaDB
+- Composer
+
+### Installation
+
+```bash
+git clone https://github.com/your-username/therapist-booking.git
+cd therapist-booking
+composer install
+cp .env.example .env
+php artisan key:generate
+
