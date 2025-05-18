@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    
+
     public function up(): void
 
     {
-        
+
         Schema::create('terapis', function (Blueprint $table) {
             $table->id('id');
             $table->foreignId('id_user')->constrained('users')->onDelete('cascade');
@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nomor_lisensi')->nullable(); // STR/SIPP
             $table->text('deskripsi')->nullable(); // Biodata singkat
             $table->decimal('tarif_per_jam', 10, 2)->nullable(); // Contoh: 150000.00
+            $table->string('foto');
             $table->timestamps();
         });
 
@@ -61,6 +62,14 @@ return new class extends Migration
             $table->string('bukti_pembayaran')->nullable(); // Path gambar
             $table->timestamps();
         });
+
+        Schema::create('jenis_therapy', function (Blueprint $table) {
+            $table->id('id');
+            $table->string('gambar');
+            $table->string('jenis_therapy');
+            $table->text('penjelasan');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -68,11 +77,12 @@ return new class extends Migration
      */
     public function down(): void
     {
-        
+
         Schema::dropIfExists('terapis');
         Schema::dropIfExists('jadwal');
         Schema::dropIfExists('janji_tamu');
         Schema::dropIfExists('ulasan');
         Schema::dropIfExists('pembayaran');
+        Schema::dropIfExists('jenis_therapy');
     }
 };

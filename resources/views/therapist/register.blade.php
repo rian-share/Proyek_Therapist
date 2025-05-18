@@ -103,7 +103,8 @@
                             <i class='bx bxs-user'></i>
                             <label for="email" class="form-label">User Name</label>
                             <input type="text" class="form-control @error('nama_pengguna') is-invalid @enderror"
-                                id="email" placeholder="Masukkan Nama Anda" autofocus name="nama_pengguna">
+                                id="email" placeholder="Masukkan Nama Anda" autofocus name="nama_pengguna"
+                                value="{{ old('nama_pengguna') }}">
                             @error('nama_pengguna')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     {{ $message }}
@@ -116,7 +117,8 @@
                             <i class='bx bxs-lock'></i>
                             <label for="password" class="form-label">Password</label>
                             <input type="password" class="form-control @error('kata_sandi') is-invalid @enderror"
-                                id="password" placeholder="Masukkan Sandi Anda" name="kata_sandi">
+                                id="password" placeholder="Masukkan Sandi Anda" name="kata_sandi"
+                                value="{{ old('kata_sandi') }}">
 
                             @error('kata_sandi')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
@@ -126,11 +128,12 @@
                         </div>
 
                         <div class="mb-3">
-                            <i class='bx bxs-lock-alt' ></i>
+                            <i class='bx bxs-lock-alt'></i>
                             <label for="password" class="form-label">Confirmasi Password</label>
                             <input type="password"
                                 class="form-control @error('kata_sandi_confirmation') is-invalid @enderror"
-                                id="password" placeholder="Konfirmasi Sandi" name="kata_sandi_confirmation">
+                                id="password" placeholder="Konfirmasi Sandi" name="kata_sandi_confirmation"
+                                value="{{ old('kata_sandi_confirmation') }}">
 
                             @error('kata_sandi_confirmation')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
@@ -140,10 +143,11 @@
                         </div>
 
                         <div class="mb-3">
-                            <i class='bx bxs-envelope' ></i>
+                            <i class='bx bxs-envelope'></i>
                             <label for="email" class="form-label">Email address</label>
                             <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                id="email" placeholder="Masukkan Email Anda" name="email">
+                                id="email" placeholder="Masukkan Email Anda" name="email"
+                                value="{{ old('email') }}">
                             @error('email')
                                 <div id="validationServer03Feedback" class="invalid-feedback">
                                     {{ $message }}
@@ -165,6 +169,9 @@
 
     <!-- Bootstrap JS Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    {{-- sweet alert --}}
+  
+
 </body>
 
 </html>

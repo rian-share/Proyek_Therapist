@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id('id');
-            $table->string('nama_pengguna')->unique(); // username
-            $table->string('kata_sandi'); // password (bcrypt)
+            $table->string('nama_pengguna')->unique(); 
+            $table->string('kata_sandi'); 
             $table->string('email')->unique();
             $table->enum('peran', ['admin', 'terapis', 'pasien'])->default('pasien'); // role
             $table->timestamps();
